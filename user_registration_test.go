@@ -8,7 +8,7 @@ import (
 
 func TestRegistration_Valid(t *testing.T) {
 	email := "testing@gmail.com"
-	password := "testing123"
+	password := "Testing123*"
 	user, err := Register(email, password)
 	assert.Equal(t, nil, err)
 	assert.NotEqual(t, password, user.password)
