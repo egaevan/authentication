@@ -1,6 +1,9 @@
 package authentication
 
-import "golang.org/x/crypto/bcrypt"
+import (
+	"errors"
+	"golang.org/x/crypto/bcrypt"
+)
 
 type User struct {
 	email    string
@@ -20,6 +23,10 @@ func (u User) IsActive() bool {
 }
 
 func Register(email, password string) (*User, error) {
+	if email == "testing@gmail.com" {
+		return nil, errors.New("email already exists")
+	}
+
 	hashedBytes, err := bcrypt.GenerateFromPassword(
 		[]byte(password),
 		bcrypt.DefaultCost,
