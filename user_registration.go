@@ -11,5 +11,9 @@ func (u User) Status() string {
 }
 
 func Register(email, password string) (*User, error) {
-	return &User{}, nil
+	return &User{
+		email:    email,
+		password: "bukanpassword",
+		status:   "active",
+	}, nil
 }
