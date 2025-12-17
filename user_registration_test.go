@@ -1,6 +1,7 @@
 package authentication
 
 import (
+	"errors"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
@@ -19,6 +20,6 @@ func TestRegistration_DuplicateEmail(t *testing.T) {
 	email := "testing@gmail.com"
 	password := "testing123"
 	user, err := Register(email, password)
-	assert.Equal(t, "email already exists", err)
-	assert.Equal(t, nil, user)
+	assert.Equal(t, errors.New("email already exists"), err)
+	assert.Nil(t, user)
 }
