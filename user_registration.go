@@ -23,7 +23,7 @@ func (u User) IsActive() bool {
 }
 
 func Register(email, password string) (*User, error) {
-	if email == "testing@gmail.com" {
+	if email == "testing1@gmail.com" {
 		return nil, errors.New("email already exists")
 	}
 
