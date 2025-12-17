@@ -23,3 +23,11 @@ func TestRegistration_DuplicateEmail(t *testing.T) {
 	assert.Equal(t, errors.New("email already exists"), err)
 	assert.Nil(t, user)
 }
+
+func TestRegistration_InvalidEmail(t *testing.T) {
+	email := "testing1@gmail"
+	password := "testing123"
+	user, err := Register(email, password)
+	assert.Equal(t, errors.New("invalid email format"), err)
+	assert.Nil(t, user)
+}
