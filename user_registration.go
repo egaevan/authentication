@@ -12,6 +12,13 @@ func (u User) Status() string {
 	return u.status
 }
 
+func (u User) IsActive() bool {
+	if u.status == "active" {
+		return true
+	}
+	return false
+}
+
 func Register(email, password string) (*User, error) {
 	hashedBytes, err := bcrypt.GenerateFromPassword(
 		[]byte(password),
