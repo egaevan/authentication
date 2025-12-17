@@ -14,3 +14,11 @@ func TestRegistration_Valid(t *testing.T) {
 	assert.Equal(t, "active", user.status)
 	assert.True(t, user.IsActive())
 }
+
+func TestRegistration_DuplicateEmail(t *testing.T) {
+	email := "testing@gmail.com"
+	password := "testing123"
+	user, err := Register(email, password)
+	assert.Equal(t, "email already exists", err)
+	assert.Equal(t, nil, user)
+}
