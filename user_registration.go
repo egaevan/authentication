@@ -4,6 +4,7 @@ import (
 	"errors"
 	"golang.org/x/crypto/bcrypt"
 	"regexp"
+	"unicode"
 )
 
 type User struct {
@@ -31,6 +32,34 @@ func Register(email, password string) (*User, error) {
 	var emailRegex = regexp.MustCompile(`^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$`)
 	if !emailRegex.MatchString(email) {
 		return nil, errors.New("invalid email format")
+	}
+
+	if len(password) < 8 {
+		return nil, errors.New("password too weak")
+	}
+
+	var (
+		hasUpper  bool
+		hasLower  bool
+		hasDigit  bool
+		hasSymbol bool
+	)
+
+	for _, c := range password {
+		switch {
+		case unicode.IsUpper(c):
+			hasUpper = true
+		case unicode.IsLower(c):
+			hasLower = true
+		case unicode.IsDigit(c):
+			hasDigit = true
+		case unicode.IsPunct(c) || unicode.IsSymbol(c):
+			hasSymbol = true
+		}
+	}
+
+	if !(hasUpper && hasLower && hasDigit && hasSymbol) {
+		return nil, errors.New("password too weak")
 	}
 
 	hashedBytes, err := bcrypt.GenerateFromPassword(
