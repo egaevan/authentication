@@ -31,3 +31,11 @@ func TestRegistration_InvalidEmail(t *testing.T) {
 	assert.Equal(t, errors.New("invalid email format"), err)
 	assert.Nil(t, user)
 }
+
+func TestRegistration_WeakPassword(t *testing.T) {
+	email := "testing@gmail.com"
+	password := "12345678"
+	user, err := Register(email, password)
+	assert.Equal(t, errors.New("password too weak"), err)
+	assert.Nil(t, user)
+}
