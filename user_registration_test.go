@@ -11,8 +11,8 @@ func TestRegistration_Valid(t *testing.T) {
 	password := "Testing123*"
 	user, err := Register(email, password)
 	assert.Equal(t, nil, err)
-	assert.NotEqual(t, password, user.password)
-	assert.Equal(t, "active", user.status)
+	assert.NotEqual(t, password, user.Password())
+	assert.Equal(t, "active", user.Status())
 	assert.True(t, user.IsActive())
 }
 
