@@ -6,12 +6,12 @@ type User struct {
 	status   string
 }
 
-func NewUser(email Email, passwordHash Password) (*User, error) {
+func NewUser(email Email, passwordHash Password) *User {
 	return &User{
 		email:    email,
 		password: passwordHash,
 		status:   "active",
-	}, nil
+	}
 }
 
 func (u User) Status() string {

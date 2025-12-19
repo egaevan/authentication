@@ -1,4 +1,4 @@
-package authentication
+package usecase
 
 import (
 	"authentication/domain"
@@ -20,10 +20,5 @@ func Register(email, password string) (*domain.User, error) {
 		return nil, err
 	}
 
-	user, err := domain.NewUser(emailDomain, passwordHash)
-	if err != nil {
-		return nil, err
-	}
-
-	return user, nil
+	return domain.NewUser(emailDomain, passwordHash), nil
 }
