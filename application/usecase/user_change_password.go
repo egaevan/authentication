@@ -13,8 +13,19 @@ func NewChangePasswordUser(users map[string]*domain.User) *ChangePassword {
 	return &ChangePassword{users: users}
 }
 
-func (uc ChangePassword) Execute(token string, oldPassword string, newPassword string) error {
-	if oldPassword == "oldPassword-wrong" {
+func (uc ChangePassword) Execute(tokenStr, oldPassword, newPassword string) error {
+	token := domain.Token(tokenStr)
+
+	if !token.IsValid() {
+		return errors.New("invalid token")
+	}
+
+	user, ok := uc.users[token.Email()]
+	if !ok {
+		return errors.New("user not found")
+	}
+
+	if string(user.Password()) != oldPassword {
 		return errors.New("invalid old password")
 	}
 

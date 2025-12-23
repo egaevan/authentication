@@ -1,6 +1,7 @@
 package usecase
 
 import (
+	"authentication/domain"
 	"errors"
 )
 
@@ -11,8 +12,10 @@ func NewLogoutUser() *Logout {
 	return &Logout{}
 }
 
-func (uc Logout) Execute(token string) error {
-	if token != "token" {
+func (uc Logout) Execute(tokenStr string) error {
+	token := domain.Token(tokenStr)
+
+	if !token.IsValid() {
 		return errors.New("invalid token")
 	}
 
