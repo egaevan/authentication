@@ -32,7 +32,7 @@ func (uc Login) Execute(email string, password string) (token string, err error)
 		return "", errors.New("invalid credentials")
 	}
 
-	tokenVO := domain.NewToken("userId", user.Email(), "")
+	tokenVO := domain.NewToken(user.IdString(), user.Email(), "", "")
 
 	return string(tokenVO), nil
 }

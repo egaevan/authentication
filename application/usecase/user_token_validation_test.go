@@ -2,13 +2,14 @@ package usecase_test
 
 import (
 	"authentication/application/usecase"
+	"authentication/testdata"
 	"errors"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
 func TestTokenValidation_Valid(t *testing.T) {
-	token := "token"
+	token := string(testdata.TokenValid)
 	validate := usecase.NewValidateTokenUser()
 	userId, err := validate.Execute(token)
 	assert.Equal(t, nil, err)
@@ -16,7 +17,7 @@ func TestTokenValidation_Valid(t *testing.T) {
 }
 
 func TestTokenValidation_TokenExpired(t *testing.T) {
-	token := "token-expired"
+	token := string(testdata.TokenExpired)
 	validate := usecase.NewValidateTokenUser()
 	userId, err := validate.Execute(token)
 	assert.Equal(t, errors.New("token expired"), err)
@@ -24,7 +25,7 @@ func TestTokenValidation_TokenExpired(t *testing.T) {
 }
 
 func TestTokenValidation_TokenRevoked(t *testing.T) {
-	token := "token-revoked"
+	token := string(testdata.TokenRevoked)
 	validate := usecase.NewValidateTokenUser()
 	userId, err := validate.Execute(token)
 	assert.Equal(t, errors.New("token revoked"), err)

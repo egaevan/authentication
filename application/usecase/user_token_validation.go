@@ -1,6 +1,9 @@
 package usecase
 
-import "errors"
+import (
+	"authentication/domain"
+	"errors"
+)
 
 type ValidateToken struct {
 }
@@ -9,14 +12,16 @@ func NewValidateTokenUser() *ValidateToken {
 	return &ValidateToken{}
 }
 
-func (uc ValidateToken) Execute(token string) (string, error) {
-	if token == "token-expired" {
+func (uc ValidateToken) Execute(tokenStr string) (string, error) {
+	token := domain.Token(tokenStr)
+
+	if token.IsExpired() {
 		return "", errors.New("token expired")
 	}
 
-	if token == "token-revoked" {
+	if token.IsRevoked() {
 		return "", errors.New("token revoked")
 	}
 
-	return "user-id", nil
+	return token.UserId(), nil
 }

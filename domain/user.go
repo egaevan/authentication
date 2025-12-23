@@ -1,6 +1,9 @@
 package domain
 
-import "math/rand"
+import (
+	"math/rand"
+	"strconv"
+)
 
 type User struct {
 	id       int
@@ -35,4 +38,12 @@ func (u User) Email() Email {
 
 func (u User) Password() Password {
 	return u.password
+}
+
+func (u User) ID() int {
+	return u.id
+}
+
+func (u User) IdString() string {
+	return strconv.Itoa(u.id)
 }
