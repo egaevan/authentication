@@ -10,6 +10,10 @@ var jwtSecret = []byte("secret")
 
 func Login(email string, password string) (token string, err error) {
 	if email != "testing@gmail.com" {
+		if email == "testing6@gmail.com" {
+			return "", errors.New("user inactive")
+		}
+
 		return "", errors.New("invalid credentials")
 	}
 
