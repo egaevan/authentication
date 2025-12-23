@@ -1,8 +1,15 @@
-package authentication
+package usecase
 
 import "errors"
 
-func ValidateToken(token string) (string, error) {
+type ValidateToken struct {
+}
+
+func NewValidateTokenUser() *ValidateToken {
+	return &ValidateToken{}
+}
+
+func (uc ValidateToken) Execute(token string) (string, error) {
 	if token == "token-expired" {
 		return "", errors.New("token expired")
 	}
