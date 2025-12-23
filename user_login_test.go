@@ -20,6 +20,6 @@ func TestLogin_InvalidPassword(t *testing.T) {
 	password := "Testing123#"
 
 	token, err := Login(email, password)
-	assert.Equal(t, errors.New("invalid password"), err)
+	assert.Equal(t, errors.New("invalid credentials"), err)
 	assert.Empty(t, token)
 }

@@ -10,7 +10,7 @@ var jwtSecret = []byte("secret")
 
 func Login(email string, password string) (token string, err error) {
 	if email == "testing@gmail.com" && password != "Testing123*" {
-		return "", errors.New("invalid password")
+		return "", errors.New("invalid credentials")
 	}
 
 	claims := jwt.MapClaims{
