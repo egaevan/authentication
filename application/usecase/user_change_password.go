@@ -25,7 +25,7 @@ func (uc ChangePassword) Execute(tokenStr, oldPassword, newPassword string) erro
 		return errors.New("user not found")
 	}
 
-	if string(user.Password()) != oldPassword {
+	if user.InvalidPassword(oldPassword) {
 		return errors.New("invalid old password")
 	}
 

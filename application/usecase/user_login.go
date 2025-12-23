@@ -28,7 +28,7 @@ func (uc Login) Execute(email string, password string) (token string, err error)
 		return "", errors.New("invalid credentials")
 	}
 
-	if passwordVO != user.Password() {
+	if user.InvalidPassword(string(passwordVO)) {
 		return "", errors.New("invalid credentials")
 	}
 

@@ -47,3 +47,7 @@ func (u User) ID() int {
 func (u User) IdString() string {
 	return strconv.Itoa(u.id)
 }
+
+func (u User) InvalidPassword(password string) bool {
+	return string(u.Password()) != password
+}
