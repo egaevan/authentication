@@ -12,7 +12,7 @@ func TestLogin_Valid(t *testing.T) {
 
 	token, err := Login(email, password)
 	assert.Equal(t, nil, err)
-	assert.NotNil(t, token)
+	assert.NotEmpty(t, token)
 }
 
 func TestLogin_InvalidPassword(t *testing.T) {
@@ -21,5 +21,5 @@ func TestLogin_InvalidPassword(t *testing.T) {
 
 	token, err := Login(email, password)
 	assert.Equal(t, errors.New("invalid password"), err)
-	assert.Nil(t, token)
+	assert.Empty(t, token)
 }

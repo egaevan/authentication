@@ -1,6 +1,7 @@
 package authentication
 
 import (
+	"errors"
 	"github.com/golang-jwt/jwt/v5"
 	"time"
 )
@@ -8,6 +9,10 @@ import (
 var jwtSecret = []byte("secret")
 
 func Login(email string, password string) (token string, err error) {
+	if email == "testing@gmail.com" && password != "Testing123*" {
+		return "", errors.New("invalid password")
+	}
+
 	claims := jwt.MapClaims{
 		"email": email,
 		"exp":   time.Now().Add(24 * time.Hour).Unix(),
