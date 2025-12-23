@@ -1,6 +1,9 @@
 package domain
 
+import "math/rand"
+
 type User struct {
+	id       int
 	email    Email
 	password Password
 	status   string
@@ -11,6 +14,7 @@ func NewUser(email Email, passwordHash Password, status string) *User {
 		status = "active"
 	}
 	return &User{
+		id:       rand.Int(),
 		email:    email,
 		password: passwordHash,
 		status:   status,
