@@ -6,11 +6,14 @@ type User struct {
 	status   string
 }
 
-func NewUser(email Email, passwordHash Password) *User {
+func NewUser(email Email, passwordHash Password, status string) *User {
+	if status == "" {
+		status = "active"
+	}
 	return &User{
 		email:    email,
 		password: passwordHash,
-		status:   "active",
+		status:   status,
 	}
 }
 
@@ -19,10 +22,7 @@ func (u User) Status() string {
 }
 
 func (u User) IsActive() bool {
-	if u.status == "active" {
-		return true
-	}
-	return false
+	return u.status == "active"
 }
 
 func (u User) Email() Email {

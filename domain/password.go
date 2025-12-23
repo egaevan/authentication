@@ -2,7 +2,6 @@ package domain
 
 import (
 	"errors"
-	"golang.org/x/crypto/bcrypt"
 	"unicode"
 )
 
@@ -37,13 +36,13 @@ func NewPassword(rawPass string) (Password, error) {
 		return "", errors.New("password too weak")
 	}
 
-	hashedBytes, err := bcrypt.GenerateFromPassword(
-		[]byte(rawPass),
-		bcrypt.DefaultCost,
-	)
-	if err != nil {
-		return "", err
-	}
+	//hashedBytes, err := bcrypt.GenerateFromPassword(
+	//	[]byte(rawPass),
+	//	bcrypt.DefaultCost,
+	//)
+	//if err != nil {
+	//	return "", err
+	//}
 
-	return Password(hashedBytes), nil
+	return Password(rawPass), nil
 }
