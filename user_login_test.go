@@ -23,3 +23,12 @@ func TestLogin_InvalidPassword(t *testing.T) {
 	assert.Equal(t, errors.New("invalid credentials"), err)
 	assert.Empty(t, token)
 }
+
+func TestLogin_EmailNotRegistered(t *testing.T) {
+	email := "testing5@gmail.com"
+	password := "Testing123*"
+
+	token, err := Login(email, password)
+	assert.Equal(t, errors.New("invalid credentials"), err)
+	assert.Empty(t, token)
+}
