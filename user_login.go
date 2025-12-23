@@ -9,7 +9,11 @@ import (
 var jwtSecret = []byte("secret")
 
 func Login(email string, password string) (token string, err error) {
-	if email == "testing@gmail.com" && password != "Testing123*" {
+	if email != "testing@gmail.com" {
+		return "", errors.New("invalid credentials")
+	}
+
+	if password != "Testing123*" {
 		return "", errors.New("invalid credentials")
 	}
 
